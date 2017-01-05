@@ -1,7 +1,10 @@
-language: ruby
-rvm:
- - 2.2
- - jruby
- - rbx-2
-# uncomment and edit the following line if your project needs to run something other than `rake`:
-# script: bundle exec rspec spec
+language: python
+python:
+  - "2.7"
+install:
+  - pip install -r travis/requirements.txt
+  - pip install coveralls
+script:
+  - python manage.py test home
+  - coverage run --source=home manage.py test home
+after_success: coveralls
